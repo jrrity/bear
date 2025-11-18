@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry - Bear</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bear {
+            position: relative;
+            width: 300px;
+            height: 380px;
+            margin: 0 auto 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        /* Head */
+        .bear-head {
+            width: 180px;
+            height: 180px;
+            background: #FF8C42;
+            border-radius: 50%;
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            border: 5px solid #E67529;
+            z-index: 2;
+        }
+        
+        .ear {
+            width: 55px;
+            height: 55px;
+            background: #FF8C42;
+            border-radius: 50%;
+            position: absolute;
+            border: 5px solid #E67529;
+        }
+        
+        .ear.left {
+            top: -15px;
+            left: 15px;
+        }
+        
+        .ear.right {
+            top: -15px;
+            right: 15px;
+        }
+        
+        .ear-inner {
+            width: 32px;
+            height: 32px;
+            background: #FFB380;
+            border-radius: 50%;
+            position: absolute;
+            top: 9px;
+            left: 9px;
+        }
+        
+        /* Mini bear on top of head */
+        .mini-bear-image {
+            position: absolute;
+            width: 90px;
+            top: -45px;
+            left: 105px;
+            z-index: 10;
+            animation: miniBearFloat 2s ease-in-out infinite;
+        }
+        
+        @keyframes miniBearFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        /* Face */
+        .face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+        }
+        
+        .eye {
+            width: 20px;
+            height: 24px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: -30px;
+        }
+        
+        .eye.left { left: 45px; }
+        .eye.right { right: 45px; }
+        
+        .eye-shine {
+            width: 9px;
+            height: 9px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        
+        .snout {
+            width: 60px;
+            height: 45px;
+            background: #FFD4A3;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -50px;
+            left: 57px;
+        }
+        
+        .nose {
+            width: 16px;
+            height: 13px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 22px;
+        }
+        
+        .mouth {
+            position: absolute;
+            top: 24px;
+            left: 20px;
+        }
+        
+        .mouth-left,
+        .mouth-right {
+            width: 10px;
+            height: 8px;
+            border: 2px solid #000;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            position: absolute;
+        }
+        
+        .mouth-left {
+            left: 10px;
+            border-right: none;
+        }
+        
+        .mouth-right {
+            right: -10px;
+            border-left: none;
+        }
+        
+        /* Body */
+        .body {
+            width: 230px;
+            height: 220px;
+            background: #FF8C42;
+            border-radius: 50% 50% 45% 45%;
+            position: absolute;
+            top: 180px;
+            left: 40px;
+            border: 5px solid #E67529;
+            z-index: 1;
+        }
+        
+        .belly {
+            width: 140px;
+            height: 140px;
+            background: #FFD4A3;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            left: 40px;
+        }
+
+        /* FIX 1: Heart above the hands */
+        .heart-container {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: heartFloat 2s ease-in-out infinite;
+            z-index: 999;
+        }
+        
+        @keyframes heartFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-8px); }
+        }
+        
+        .heart {
+            width: 100px;
+            height: 100px;
+            top: -100px;
+            right: -55px;
+            position: absolute;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: "";
+            width: 50px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff8fc7 0%, #ff6b9d 100%);
+            border-radius: 50px 50px 0 0;
+            position: absolute;
+            box-shadow: 0 5px 25px rgba(255, 107, 157, 0.5);
+        }
+
+        .heart-text {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+            z-index: 12;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            white-space: nowrap;
+        }
+        
+        .heart:before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        /* FIX 2: Lower arm z-index so heart shows on top */
+        .arm {
+            width: 60px;
+            height: 130px;
+            background: #FF8C42;
+            border-radius: 50px;
+            position: absolute;
+            border: 5px solid #E67529;
+            z-index: 1; /* ← lowered from 3 */
+        }
+        
+        .arm.left {
+            top: 220px;
+            left: 55px;
+            transform: rotate(-45deg);
+        }
+        
+        .arm.right {
+            top: 220px;
+            right: 45px;
+            transform: rotate(45deg);
+        }
+        
+        .paw {
+            width: 32px;
+            height: 32px;
+            background: #FFB380;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 8px;
+            left: 14px;
+        }
+        
+        /* Legs */
+        .leg {
+            width: 60px;
+            height: 75px;
+            background: #FF8C42;
+            border-radius: 40px 40px 50% 50%;
+            position: absolute;
+            top: 360px;
+            border: 5px solid #E67529;
+            z-index: 0;
+        }
+        
+        .leg.left { left: 70px; }
+        .leg.right { right: 70px; }
+        
+        .foot {
+            width: 48px;
+            height: 38px;
+            background: #FFB380;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 2px;
+            left: 4px;
+        }
+        
+        h1 {
+            font-size: 56px;
+            color: #FF8C42;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+        
+        p {
+            font-size: 22px;
+            color: #E67529;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="bear">
+
+            <img src="bear.png" class="mini-bear-image">
+
+            <div class="bear-head">
+                <div class="ear left"><div class="ear-inner"></div></div>
+                <div class="ear right"><div class="ear-inner"></div></div>
+
+                <div class="face">
+                    <div class="eye left"><div class="eye-shine"></div></div>
+                    <div class="eye right"><div class="eye-shine"></div></div>
+                    <div class="snout">
+                        <div class="nose"></div>
+                        <div class="mouth">
+                            <div class="mouth-left"></div>
+                            <div class="mouth-right"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="body">
+                <div class="belly"></div>                
+            </div>
+            <div class="heart-container">
+                <div class="heart">
+                    <div class="heart-text">I'm Sorry</div>
+                </div>
+            </div>
+            <div class="arm left"><div class="paw"></div></div>
+            <div class="arm right"><div class="paw"></div></div>
+
+            <div class="leg left"><div class="foot"></div></div>
+            <div class="leg right"><div class="foot"></div></div>
+        </div>
+
+        <h1>I'm Sorry</h1>
+        <p>Please forgive me. I truly mean it from the bottom of my heart! 🐻💕</p>
+
+    </div>
+</body>
+</html>
